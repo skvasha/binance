@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -26,6 +28,22 @@ namespace WebTools;
 /// Interaction logic for MainWindow.xaml
 /// </summary>
 
+public class BinanceKLinesInterval
+{
+    public string IntervalName { get; set; }
+    public string IntervalValue { get; set; } 
+};
+
+
+public class BinanceApiParams {
+    private string _symbol;
+    private BinanceKLinesInterval _interval = new BinanceKLinesInterval { IntervalName = "Days: 1d", IntervalValue = "1d" };
+    private long _startTime;
+    private long _endTime;
+    private string _timeZone = "0"; //Default: 0 - UTC
+    private int _limit; // Default: 500; Maximum: 1000
+
+}
 public class B_KlineData
 {
     public long openTime { get; set; }
@@ -41,18 +59,21 @@ public class B_KlineData
     public double quoteVolume { get; set; }
     public string ignore { get; set; }
 
-    public DateTime EpochToDateTime(long epoch)
+    public static DateTime EpochToDateTime(long epoch)
     {
-        DateTime dateTime = (new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)).AddMilliseconds(epoch);
+        DateTime dateTime = (new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local)).AddMilliseconds(epoch);
         return dateTime;
     }
 
-    public long DateTimeToEpoch(DateTime dateTime)
+    public static long DateTimeToEpoch(DateTime dateTime)
     {
-        DateTimeOffset dateTimeToEpochOffcet = dateTime.ToUniversalTime();
+        DateTimeOffset dateTimeToEpochOffcet = new DateTimeOffset(dateTime, new TimeSpan(0,0,0,0,0));//.ToUniversalTime();
         long timeEpochUnix = dateTimeToEpochOffcet.ToUnixTimeMilliseconds();
         return timeEpochUnix;
     }
+
+    
+
 
     public B_KlineData(List<object> values)
     {
@@ -174,16 +195,23 @@ public class CustomDateTimeConverter : JsonConverter<DateTime>
 
 public partial class MainWindow : Window
 {
+    public ViewModel BinanceViewModel { get; private set; }
+
+    public string regexTimePattern = "^([0-1][0-9]|[2][0-3]):[0-5][0-9]:[0-5][0-9].[0-9]{3,3}$";
+
     public MainWindow()
     {
         InitializeComponent();
+        BinanceViewModel = new ViewModel();
+        DataContext = BinanceViewModel;
+        dateFrom.SelectedDate = DateTime.UtcNow;
+        dateTo.SelectedDate = DateTime.UtcNow;
+        //BinanceViewModel.BinanceKLinesIntervals.
+        //foreach (var item in BinanceApiInitParams.intervals)
+        //{
+        //    cbInterval.Items.Add(item._name);
+        //}
     }
-
-    private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-    {
-
-    }
-
 
     private void btnStart_Click(object sender, RoutedEventArgs e)
     {
@@ -285,5 +313,95 @@ public partial class MainWindow : Window
             Console.WriteLine("Deserialized to Object List:");
             WriteListToConsole(currencyRates);
         }
+    }
+
+    private void cbInterval_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (cbInterval.SelectedIndex > -1)
+        {
+            BinanceKLinesInterval selectedInterval = (BinanceKLinesInterval) cbInterval.SelectedItem;
+           // MessageBox.Show(string.Format(@" {0} ( {1} )", selectedInterval.IntervalName, selectedInterval.IntervalValue));
+        }
+    }
+
+    private void btnCalcDateTimeToEpoch_Click(object sender, RoutedEventArgs e)
+    {
+       /* 
+        DateTime dateFromParse = new DateTime();
+        DateTime dateToParse = new DateTime();
+        bool isDateFrom = DateTime.TryParse(dateFrom.Text, out dateFromParse);
+        bool isDateTo = DateTime.TryParse(dateTo.Text, out dateToParse);
+        */
+        if(dateTo.SelectedDate < dateFrom.SelectedDate)
+        {
+            MessageBox.Show("Date To must be greater than Date From");
+            return;
+        }
+        //        string regexTimePattern = "^[0-9]{2,2}:[0-9]{2,2}:[0-9]{2,2}.[0-9]{3,3}$";
+        bool isTimeFrom = Regex.IsMatch(timeFrom.Text, regexTimePattern);
+        bool isTimeTo = Regex.IsMatch(timeTo.Text, regexTimePattern);
+        // bool isTimeFrom = Time.TryParse(dateFrom.Text, out dateFromParse);
+        // bool isTimeTo = DateTime.TryParse(dateTo.Text, out dateToParse);
+        if (isTimeFrom && isTimeTo)
+        {
+            //MessageBox.Show("Date From: " + dateFromParse.ToString("dd.MM.yyyy HH:mm:ss.fff z") + " - DateTo: " + dateToParse.ToString("dd.MM.yyyy HH:mm:ss.fff z"));
+            //MessageBox.Show("Time From: " + timeFrom.Text + " - TimeTo: " + timeTo.Text);
+
+            string textDateTimeFrom = dateFrom.SelectedDate.GetValueOrDefault(DateTime.UtcNow).ToString("dd.MM.yyyy ") + timeFrom.Text;
+            string textDateTimeTo = dateTo.SelectedDate.GetValueOrDefault(DateTime.UtcNow).ToString("dd.MM.yyyy ") + timeTo.Text;
+            DateTime dateTimeFrom = DateTime.ParseExact(textDateTimeFrom, "dd.MM.yyyy HH:mm:ss.fff", null);
+            DateTime dateTimeTo = DateTime.ParseExact(textDateTimeTo, "dd.MM.yyyy HH:mm:ss.fff", null);
+
+            //MessageBox.Show("DateTime From: " + dateTimeFrom.ToString("dd.MM.yyyy HH:mm:ss.fff") + " - DateTime To: " 
+              //  + dateTimeTo.ToString("dd.MM.yyyy HH:mm:ss.fff"));
+
+            epochTimeFrom.Text = B_KlineData.DateTimeToEpoch(dateTimeFrom).ToString();
+            epochTimeTo.Text = B_KlineData.DateTimeToEpoch(dateTimeTo).ToString();
+        }
+        else
+        {
+            MessageBox.Show("Date or Time not correct!");
+            return;
+        }
+    }
+
+    private void timeTextBox_GotFocus(object sender, RoutedEventArgs e)
+    {
+        if (sender != null)
+        {
+            (sender as TextBox).SelectAll();
+        }
+    }
+
+    private void timeFrom_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!Regex.IsMatch((sender as TextBox).Text, regexTimePattern))
+        {
+            (sender as TextBox).Background = Brushes.Pink;
+        } else
+        {
+            (sender as TextBox).Background = Brushes.White;
+        }
+    }
+
+    private void btnCalcEpochToDateTime_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            long inputTimeEpochFrom = long.Parse(epochTimeFrom.Text);
+            long inputTimeEpochTo = long.Parse(epochTimeTo.Text);
+
+            DateTime dateTimeFromEpochFrom = B_KlineData.EpochToDateTime(inputTimeEpochFrom);
+            DateTime dateTimeFromEpochTo = B_KlineData.EpochToDateTime(inputTimeEpochTo);
+            dateFrom.SelectedDate = dateTimeFromEpochFrom.Date;
+            dateTo.SelectedDate = dateTimeFromEpochTo.Date;
+            timeFrom.Text = dateTimeFromEpochFrom.ToString("HH:mm:ss.fff");
+            timeTo.Text = dateTimeFromEpochTo.ToString("HH:mm:ss.fff");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Epoch DateTime is not correct");
+        }
+
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebTools")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+20ad7ecb296e7e2720dd11306a84ba7105ad012f")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebTools")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebTools")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

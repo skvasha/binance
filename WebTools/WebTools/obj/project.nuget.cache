@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "abVQQM7yAUM=",
+  "dgSpecHash": "Khsgcm3wyiA=",
   "success": true,
-  "projectFilePath": "D:\\Dev\\QA\\C-Sharp\\Self\\WebTools\\WebTools\\WebTools.csproj",
+  "projectFilePath": "D:\\git\\binance\\WebTools\\WebTools\\WebTools.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ksw54101\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],

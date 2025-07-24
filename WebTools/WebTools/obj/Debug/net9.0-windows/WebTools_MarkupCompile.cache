@@ -4,15 +4,15 @@
 exe
 C#
 .cs
-D:\Dev\QA\C-Sharp\Self\WebTools\WebTools\obj\Debug\net9.0-windows\
+D:\git\binance\WebTools\WebTools\obj\Debug\net9.0-windows\
 WebTools
 none
 false
 TRACE;DEBUG;NET;NET9_0;NETCOREAPP
-D:\Dev\QA\C-Sharp\Self\WebTools\WebTools\App.xaml
+D:\git\binance\WebTools\WebTools\App.xaml
 11407045341
 
-4-75780804
+5-1183982359
 201-117311162
 MainWindow.xaml;
 

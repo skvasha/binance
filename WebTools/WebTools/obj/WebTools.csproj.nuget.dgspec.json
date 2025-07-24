@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Dev\\QA\\C-Sharp\\Self\\WebTools\\WebTools\\WebTools.csproj": {}
+    "D:\\git\\binance\\WebTools\\WebTools\\WebTools.csproj": {}
   },
   "projects": {
-    "D:\\Dev\\QA\\C-Sharp\\Self\\WebTools\\WebTools\\WebTools.csproj": {
+    "D:\\git\\binance\\WebTools\\WebTools\\WebTools.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dev\\QA\\C-Sharp\\Self\\WebTools\\WebTools\\WebTools.csproj",
+        "projectUniqueName": "D:\\git\\binance\\WebTools\\WebTools\\WebTools.csproj",
         "projectName": "WebTools",
-        "projectPath": "D:\\Dev\\QA\\C-Sharp\\Self\\WebTools\\WebTools\\WebTools.csproj",
+        "projectPath": "D:\\git\\binance\\WebTools\\WebTools\\WebTools.csproj",
         "packagesPath": "C:\\Users\\ksw54101\\.nuget\\packages\\",
-        "outputPath": "D:\\Dev\\QA\\C-Sharp\\Self\\WebTools\\WebTools\\obj\\",
+        "outputPath": "D:\\git\\binance\\WebTools\\WebTools\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -25,7 +25,6 @@
           "net9.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "D:\\Dev\\QA\\C-Sharp\\Work\\KTS\\Libs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
