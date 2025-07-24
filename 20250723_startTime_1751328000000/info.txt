@@ -1,0 +1,4 @@
+https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1m&limit=10&startTime=1753310426000&endTime=1753310939999
+
+for 
+  klines_1m_100_start_stop.json
