@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WebTools" d:DataContext="{d:DesignInstance Type=local:ViewModel}"
+        xmlns:local="clr-namespace:WebTools" 
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -27,7 +27,7 @@
         <TextBox x:Name="timeFrom" Grid.Row="1" Grid.Column="1" TextAlignment="Center" HorizontalAlignment="Left" Text="00:00:00.000" Width="80"  Margin="5,0,0,0" GotFocus="timeTextBox_GotFocus" TextChanged="timeFrom_TextChanged" />
         <DatePicker Name="dateTo" Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left" Height="23" SelectedDateFormat="Short"></DatePicker>
         <TextBox x:Name="timeTo" Grid.Column="3" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Text="23:59:59.999" Height="23" Width="80" Grid.Row="1" GotFocus="timeTextBox_GotFocus" Margin="5,0,0,0" TextChanged="timeFrom_TextChanged"/>
-        <ComboBox ItemsSource="{Binding BinanceKLinesIntervals, Mode=TwoWay}" DisplayMemberPath="IntervalName" SelectedValuePath="IntervalValue" SelectedValue="{Binding SelectedInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cbInterval" Grid.Row="1" Grid.Column="4" SelectionChanged="cbInterval_SelectionChanged" Margin="0,0,-128,0">
+        <ComboBox ItemsSource="{Binding AllIntervals, Mode=OneWay}" DisplayMemberPath="IntervalName" SelectedValuePath="IntervalValue" SelectedValue="{Binding SelectedInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" x:Name="cbInterval" Grid.Row="1" Grid.Column="4" SelectionChanged="cbInterval_SelectionChanged" Margin="0,0,-128,0">
         </ComboBox>
         <TextBox x:Name="epochTimeFrom" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Width="220" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Text="0000000000000" Height="23"/>
         <TextBox x:Name="epochTimeTo" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Width="220" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Text="0000000000000" Height="23" />
@@ -36,6 +36,6 @@
 
         <Button Content="Start" x:Name="btnStart" HorizontalAlignment="Center" Margin="0,6,0,-6" Grid.Column="0" Grid.Row="4" Width="58" Click="btnStart_Click"/>
         <Button Content="DateTime -> Epoch" x:Name="btnCalcDateTimeToEpoch" HorizontalAlignment="Center" Margin="0,6,0,0" Grid.Column="1" Grid.Row="4" Width="110" Click="btnCalcDateTimeToEpoch_Click" Height="20" VerticalAlignment="Top"/>
-        <Button Content="Epoch -> DateTime" x:Name="btnCalcEpochToDateTime" HorizontalAlignment="Center" Margin="0,31,0,-31" Grid.Column="1" Grid.Row="4" Width="110" Click="btnCalcEpochToDateTime_Click"/>
+        <Button Content="Epoch -> DateTime" x:Name="btnCalcEpochToDateTime" HorizontalAlignment="Right" Margin="0,31,5,-31" Grid.Column="1" Grid.Row="4" Width="110" Click="btnCalcEpochToDateTime_Click"/>
     </Grid>
 </Window>

@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "D:\\git\\binance\\WebTools\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|d:\\git\\binance\\webtools\\webtools\\viewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|solutionrelative:webtools\\viewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|d:\\git\\binance\\webtools\\webtools\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|solutionrelative:webtools\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|d:\\git\\binance\\webtools\\webtools\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|solutionrelative:webtools\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|d:\\git\\binance\\webtools\\webtools\\models\\viewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|solutionrelative:webtools\\models\\viewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|d:\\git\\binance\\webtools\\webtools\\class\\binanceklinesinterval.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|solutionrelative:webtools\\class\\binanceklinesinterval.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|d:\\git\\binance\\webtools\\webtools\\class\\binanceklinedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|solutionrelative:webtools\\class\\binanceklinedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|d:\\git\\binance\\webtools\\webtools\\class\\currencyrate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DEF276E6-57A5-4D2B-8D1C-B1DE34BBC29E}|WebTools\\WebTools.csproj|solutionrelative:webtools\\class\\currencyrate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,32 +30,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "D:\\git\\binance\\WebTools\\WebTools\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "WebTools\\MainWindow.xaml.cs",
               "ToolTip": "D:\\git\\binance\\WebTools\\WebTools\\MainWindow.xaml.cs",
               "RelativeToolTip": "WebTools\\MainWindow.xaml.cs",
-              "ViewState": "AgIAABMBAAAAAAAAAAAMwI4BAABEAAAAAAAAAA==",
+              "ViewState": "AgIAADgAAAAAAAAAAAAkwEYAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-21T08:44:05.165Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "D:\\git\\binance\\WebTools\\WebTools\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "WebTools\\MainWindow.xaml",
-              "ToolTip": "D:\\git\\binance\\WebTools\\WebTools\\MainWindow.xaml",
-              "RelativeToolTip": "WebTools\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-07-21T08:22:54.716Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
@@ -73,13 +68,50 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "BinanceKLinesInterval.cs",
+              "DocumentMoniker": "D:\\git\\binance\\WebTools\\WebTools\\Class\\BinanceKLinesInterval.cs",
+              "RelativeDocumentMoniker": "WebTools\\Class\\BinanceKLinesInterval.cs",
+              "ToolTip": "D:\\git\\binance\\WebTools\\WebTools\\Class\\BinanceKLinesInterval.cs",
+              "RelativeToolTip": "WebTools\\Class\\BinanceKLinesInterval.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-01T12:25:26.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BinanceKlineData.cs",
+              "DocumentMoniker": "D:\\git\\binance\\WebTools\\WebTools\\Class\\BinanceKlineData.cs",
+              "RelativeDocumentMoniker": "WebTools\\Class\\BinanceKlineData.cs",
+              "ToolTip": "D:\\git\\binance\\WebTools\\WebTools\\Class\\BinanceKlineData.cs",
+              "RelativeToolTip": "WebTools\\Class\\BinanceKlineData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T12:12:36.454Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CurrencyRate.cs",
+              "DocumentMoniker": "D:\\git\\binance\\WebTools\\WebTools\\Class\\CurrencyRate.cs",
+              "RelativeDocumentMoniker": "WebTools\\Class\\CurrencyRate.cs",
+              "ToolTip": "D:\\git\\binance\\WebTools\\WebTools\\Class\\CurrencyRate.cs",
+              "RelativeToolTip": "WebTools\\Class\\CurrencyRate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-24T12:09:20.916Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ViewModel.cs",
-              "DocumentMoniker": "D:\\git\\binance\\WebTools\\WebTools\\ViewModel.cs",
-              "RelativeDocumentMoniker": "WebTools\\ViewModel.cs",
-              "ToolTip": "D:\\git\\binance\\WebTools\\WebTools\\ViewModel.cs",
-              "RelativeToolTip": "WebTools\\ViewModel.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAIwB8AAAAJAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\git\\binance\\WebTools\\WebTools\\Models\\ViewModel.cs",
+              "RelativeDocumentMoniker": "WebTools\\Models\\ViewModel.cs",
+              "ToolTip": "D:\\git\\binance\\WebTools\\WebTools\\Models\\ViewModel.cs",
+              "RelativeToolTip": "WebTools\\Models\\ViewModel.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAA6wCEAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-21T12:12:26.779Z",
               "EditorCaption": ""

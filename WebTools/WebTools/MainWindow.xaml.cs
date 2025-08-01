@@ -20,6 +20,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WebTools.Class;
+using WebTools.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebTools;
@@ -27,12 +29,6 @@ namespace WebTools;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-
-public class BinanceKLinesInterval
-{
-    public string IntervalName { get; set; }
-    public string IntervalValue { get; set; } 
-};
 
 
 public class BinanceApiParams {
@@ -43,137 +39,6 @@ public class BinanceApiParams {
     private string _timeZone = "0"; //Default: 0 - UTC
     private int _limit; // Default: 500; Maximum: 1000
 
-}
-public class B_KlineData
-{
-    public long openTime { get; set; }
-    public double openPrice { get; set; }
-    public double highPrice { get; set; }
-    public double lowPrice { get; set; }
-    public double closePrice { get; set; }
-    public double volume { get; set; }
-    public long closeTime { get; set; }
-    public double quoteAssetVolume { get; set; }
-    public long numberOfTrades { get; set; }
-    public double baseVolume { get; set; }
-    public double quoteVolume { get; set; }
-    public string ignore { get; set; }
-
-    public static DateTime EpochToDateTime(long epoch)
-    {
-        DateTime dateTime = (new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local)).AddMilliseconds(epoch);
-        return dateTime;
-    }
-
-    public static long DateTimeToEpoch(DateTime dateTime)
-    {
-        DateTimeOffset dateTimeToEpochOffcet = new DateTimeOffset(dateTime, new TimeSpan(0,0,0,0,0));//.ToUniversalTime();
-        long timeEpochUnix = dateTimeToEpochOffcet.ToUnixTimeMilliseconds();
-        return timeEpochUnix;
-    }
-
-    
-
-
-    public B_KlineData(List<object> values)
-    {
-        if (values != null)
-        {
-            NumberFormatInfo format = new NumberFormatInfo();
-            format.NumberDecimalSeparator = ".";
-           
-
-
-            //public long
-            this.openTime = Int64.Parse(values.ElementAt(0).ToString());
-            //string
-            this.openPrice = Double.Parse(values.ElementAt(1).ToString(), format);
-            //string
-            this.highPrice = Double.Parse(values.ElementAt(2).ToString(), format);
-            //string
-            this.lowPrice = Double.Parse(values.ElementAt(3).ToString(), format);
-            //string
-            this.closePrice = Double.Parse(values.ElementAt(4).ToString(), format);
-            //string
-            this.volume = Double.Parse(values.ElementAt(5).ToString(), format);
-            //long
-            this.closeTime = Int64.Parse(values.ElementAt(6).ToString());
-            //string
-            this.quoteAssetVolume = Double.Parse(values.ElementAt(7).ToString(), format);
-            //long
-            this.numberOfTrades = Int64.Parse(values.ElementAt(8).ToString());
-            //string
-            this.baseVolume = Double.Parse(values.ElementAt(9).ToString(), format);
-            //string
-            this.quoteVolume = Double.Parse(values.ElementAt(10).ToString(), format);
-            //string
-            this.ignore = values.ElementAt(11).ToString();
-        }
-    }
-
-    private static string DirectionStr(Double firstNumber, Double secondNumber)
-    {
-        return secondNumber - firstNumber > 0 ? "↑" : "↓";
-    }
-
-    public override string ToString()
-    {
-        return $"Time: {EpochToDateTime(openTime)} - {EpochToDateTime(closeTime)}: O:{string.Format("{0:0.00}", openPrice)} H:{string.Format("{0:0.00}", highPrice)} L:{string.Format("{0:0.00}", lowPrice)} C:{string.Format("{0:0.00}", closePrice)}" +
-            $" Diff: {string.Format("{0,10:0.00}", closePrice - openPrice)} Dir: {B_KlineData.DirectionStr(openPrice, closePrice)}";
-    }
-
-}
-
-
-public class CurrencyRate
-{
-    /*
-    "exchangedate":"05.05.2022"
-    "r030":840
-    "cc":"USD"
-    "txt":"Долар США"
-    "enname":"USDollar"
-    "rate":29.2549
-    "units":1
-    "rate_per_unit":29.2549
-    "group":"1"
-    "calcdate":"04.05.2022"
-    */
-
-    [JsonPropertyName("exchangedate")]
-    public DateTime ExchangeDate { get; set; } //":"16.07.2025",
-
-    [JsonPropertyName("r030")]
-    public int CurrencyCode { get; set; } //:840,
-    
-    [JsonPropertyName("cc")]
-    public string CurrencyCodeStr { get; set; } //":"USD",
-    
-    [JsonPropertyName("txt")]
-    public string CurrencyDescriptionUA { get; set; } //":"Долар США",
-    
-    [JsonPropertyName("enname")]
-    public string CurrencyDescriptionEN { get; set; } //":"USDollar",
-    
-    [JsonPropertyName("rate")]
-    public double Rate { get; set; } //":41.8211,
-    
-    [JsonPropertyName("units")]
-    public int Units { get; set; } //":1,
-    
-    [JsonPropertyName("rate_per_unit")]
-    public double RatePerUnit { get; set; } //":41.8211,
-    
-    [JsonPropertyName("group")]
-    public string Group { get; set; } //":"1",
-
-    [JsonPropertyName("calcdate")]
-    public DateTime CalculateRateDate { get; set; } //":"15.07.2025"
-
-    public override string ToString()
-    {
-        return $"{CurrencyCodeStr}: {ExchangeDate.ToString("dd.MM.yyyy")} - {Rate.ToString()}";
-    }
 }
 
 public class CustomDateTimeConverter : JsonConverter<DateTime>
@@ -235,7 +100,7 @@ public partial class MainWindow : Window
         }
         else
         {
-            getJsonHTTP();
+            getJsonHTTP();  
         }
     }
 
@@ -265,16 +130,15 @@ public partial class MainWindow : Window
         using (StreamReader reader = new StreamReader(fileName))
         {
             var jsonText = reader.ReadToEnd();
-            List<B_KlineData> currencyRates = DeserializeBinanceObject(jsonText);
+            List<BinanceKlineData> currencyRates = DeserializeBinanceObject(jsonText);
             Console.WriteLine("File : TEXT:");
             Console.WriteLine(jsonText);
             Console.WriteLine("Deserialized to Object List from File:");
             WriteListToConsole(currencyRates);
-
         }
     }
 
-    private List<B_KlineData> DeserializeBinanceObject(string textToDeserialize)
+    private List<BinanceKlineData> DeserializeBinanceObject(string textToDeserialize)
     {
         var options = new JsonSerializerOptions();
         options.Converters.Add(new CustomDateTimeConverter("dd.MM.yyyy"));
@@ -282,7 +146,7 @@ public partial class MainWindow : Window
 
 
         //List<B_KlineData> list = new List<B_KlineData>(); //JsonSerializer.Deserialize<List<T>>(textToDeserialize, options);
-        List<B_KlineData> list = obj.Select(values => new B_KlineData(values)).ToList();
+        List<BinanceKlineData> list = obj.Select(values => new BinanceKlineData(values)).ToList();
         WriteListToConsole(list);
 
         return list;
@@ -355,8 +219,8 @@ public partial class MainWindow : Window
             //MessageBox.Show("DateTime From: " + dateTimeFrom.ToString("dd.MM.yyyy HH:mm:ss.fff") + " - DateTime To: " 
               //  + dateTimeTo.ToString("dd.MM.yyyy HH:mm:ss.fff"));
 
-            epochTimeFrom.Text = B_KlineData.DateTimeToEpoch(dateTimeFrom).ToString();
-            epochTimeTo.Text = B_KlineData.DateTimeToEpoch(dateTimeTo).ToString();
+            epochTimeFrom.Text = BinanceKlineData.DateTimeToEpoch(dateTimeFrom).ToString();
+            epochTimeTo.Text = BinanceKlineData.DateTimeToEpoch(dateTimeTo).ToString();
         }
         else
         {
@@ -391,8 +255,8 @@ public partial class MainWindow : Window
             long inputTimeEpochFrom = long.Parse(epochTimeFrom.Text);
             long inputTimeEpochTo = long.Parse(epochTimeTo.Text);
 
-            DateTime dateTimeFromEpochFrom = B_KlineData.EpochToDateTime(inputTimeEpochFrom);
-            DateTime dateTimeFromEpochTo = B_KlineData.EpochToDateTime(inputTimeEpochTo);
+            DateTime dateTimeFromEpochFrom = BinanceKlineData.EpochToDateTime(inputTimeEpochFrom);
+            DateTime dateTimeFromEpochTo = BinanceKlineData.EpochToDateTime(inputTimeEpochTo);
             dateFrom.SelectedDate = dateTimeFromEpochFrom.Date;
             dateTo.SelectedDate = dateTimeFromEpochTo.Date;
             timeFrom.Text = dateTimeFromEpochFrom.ToString("HH:mm:ss.fff");
